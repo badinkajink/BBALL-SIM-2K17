@@ -4,15 +4,21 @@ import java.util.Scanner;
 
 /**
  * Created by William on 5/23/2017.
+ * utility class that proposes and then either rejects, suggests, or executes trades
  */
 public final class Trade {
 
     private static final int TRADE_DIFF = 2000;
     private static boolean validTrade = false;
-    //ONLY CREATE ONE FOR WHEN ACTUALLY MAKING A TRADE
+
+    //never used
     public Trade() {}
 
-    //calculates overall tradeValue of a player in general
+    /**
+     * //calculates overall tradeValue of a player in general
+     * @param p player
+     * @return
+     */
     public static double tradeValue(Player p) {
         PlayerProfile player = p.getPlayer();
         int tradeValue = player.getPV();
@@ -30,7 +36,12 @@ public final class Trade {
         return Math.pow(tradeValue,2);
     }
 
-    //calculates overall tradeValue of a player to a team
+    /**
+     * calculates overall tradeValue of a player to a team
+     * @param p player
+     * @param t team being proposed to
+     * @return tradevalue (slightly adjusted player value^2)
+     */
     public static double tradeValue(Player p, Team t) {
         PlayerProfile player = p.getPlayer();
         int tradeValue = player.getPV();
@@ -63,7 +74,14 @@ public final class Trade {
         return Math.pow(tradeValue,2);
     }
 
-    //NOT DONE YET
+    /**
+     * proposes and if valid executes trade
+     * @param p1
+     * @param team1
+     * @param p2
+     * @param team2
+     * @return doesnt do anything w boolean but too afraid to change to void
+     */
     public static boolean proposeTrade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2) {
         boolean result = true;
         String reason = null;
@@ -139,6 +157,14 @@ public final class Trade {
         return result;
     }
 
+    /**
+     * only takes from proposeTrade()
+     * executes trade between teams
+     * @param p1
+     * @param team1
+     * @param p2
+     * @param team2
+     */
     public static void trade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2) {
             ArrayList<Player> roster1 = team1.getTeam();
             ArrayList<String> names1 = new ArrayList<>();

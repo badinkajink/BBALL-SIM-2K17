@@ -84,7 +84,12 @@ public class Season {
     //picks 15 pairings
     public static void simOneGameDay() {
         simGameDayHeader = "";
-
+        //gameCount++;
+        //if (gameCount > 81) {
+            //simPlayoffs();
+            //League.setDraft();
+            //end();
+        //}
         if (League.getActiveSeason())
         {
             int[] teamNumbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
@@ -118,6 +123,11 @@ public class Season {
             simGame(League.getTeams().get(teamNumbers[24]), League.getTeams().get(teamNumbers[25]));
             simGame(League.getTeams().get(teamNumbers[26]), League.getTeams().get(teamNumbers[27]));
             simGame(League.getTeams().get(teamNumbers[28]), League.getTeams().get(teamNumbers[29]));
+            //if (gameCount > 81) {
+                //simPlayoffs();
+                //League.setDraft();
+                //end();
+            //}
         }
         else {
             System.out.println("Season is not active!");
@@ -130,10 +140,15 @@ public class Season {
             League.setDraft();
             end();
         }*/
-        gameCount++;
+        //gameCount++;
         //gameCount++;
         setRankings(teams);
         viewSimGame();
+        //if (gameCount > 81) {
+            //simPlayoffs();
+            //League.setDraft();
+            //end();
+        //}
     }
 
     public static String printSimGameDayHeader() {
@@ -141,7 +156,96 @@ public class Season {
     }
     //have to actually randomize
 
-    public static void startPlayoffs() {
+    public int getGameCount() {
+        return gameCount;
+    }
+
+    public static void end() {
+        League.endSeason();
+    }
+
+    public static void setRankings(ArrayList<Team> t) {
+        ArrayList<Team> sorted = t;
+        Collections.sort(sorted, new Comparator<Team>() {
+            @Override
+            public int compare(Team o1, Team o2) {
+                return o2.getWins() - o1.getWins();
+            }
+        });
+        rankings = sorted;
+        //or sorted.sort(Comparator.comparingInt(Team::getWins());
+    }
+
+    public static ArrayList<Team> getRankings(ArrayList<Team> t) {
+        setRankings(t);
+        return rankings;
+    }
+
+    public void simGames(int result) {
+        for (int i = 0; i < result; i++){
+            League.cutOrSignPlayers();
+            //gameCount++;
+            simOneGameDay();
+            gameCount++;
+            if (gameCount > 81) {
+                //simPlayoffs();
+                League.setDraft();
+                end();
+            }
+        }
+        if (gameCount > 81) {
+            //simPlayoffs();
+            //League.setDraft();
+            end();
+        }
+
+    }
+
+    public void simGameCount() {
+        int result = 0;
+        try {
+            System.out.println("How many games do you want to simulate?");
+            Scanner reader = new Scanner(System.in);
+            int r = reader.nextInt();
+            while (r > 83 - getGameCount() || r < 1) {
+                if (r > 83 - getGameCount() || r < 1) {
+                    int gamesLeft = 83 - getGameCount(); //could be broken during the playoffs but who cares
+                    System.out.println("Pick between 1-" + gamesLeft + " games left in the regular season:");
+                    r = reader.nextInt();
+                }
+            }
+            result = r;
+            simGames(result);
+            //reader.close();
+        }
+        catch (InputMismatchException e) {
+            System.out.println("That wasn't an int. \n ");
+            League.homeView();
+        }
+        //gamesToSim = result;
+    }
+
+    /**
+     * creates a new pop-up window
+     * right side is ranking of teams from best to worst
+     * left side is list of 15 games that were most recently played between 30 teams (15 pairings)
+     */
+    public static void viewSimGame() {
+        windowSimGame.clearTextAreaLeft();
+        windowSimGame.clearTextAreaRight();
+
+        int count = 1;
+        for (Team t: getRankings(teams)) {
+            windowSimGame.printLogLeft(count + ": " + t.printGameHeader());
+            count++;
+        }
+        windowSimGame.printLogRight(Season.printSimGameDayHeader());
+    }
+
+    /**
+     * playoffs don't work
+     */
+    /*    public static void startPlayoffs() {
         setRankings(teams);
         playoffTeams = getRankings(teams);
 
@@ -352,85 +456,5 @@ public class Season {
             simOneFinalDay();
         }
         System.out.println(getChampion());
-    }
-
-    public int getGameCount() {
-        return gameCount;
-    }
-
-    public static void end() {
-        League.endSeason();
-    }
-
-    public static void setRankings(ArrayList<Team> t) {
-        ArrayList<Team> sorted = t;
-        Collections.sort(sorted, new Comparator<Team>() {
-            @Override
-            public int compare(Team o1, Team o2) {
-                return o2.getWins() - o1.getWins();
-            }
-        });
-        rankings = sorted;
-        //or sorted.sort(Comparator.comparingInt(Team::getWins());
-    }
-
-    public static ArrayList<Team> getRankings(ArrayList<Team> t) {
-        setRankings(t);
-        return rankings;
-    }
-
-    public void simGames() {
-        simGameCount();
-        int games = gamesToSim;
-        for (int i = 0; i < games; i++){
-            //gameCount++;
-            simOneGameDay();
-        }
-        if (gameCount >= 82) {
-            //simPlayoffs();
-            League.setDraft();
-            end();
-        }
-
-    }
-
-    public void simGameCount() {
-        int result = 0;
-        try {
-            System.out.println("How many games do you want to simulate?");
-            Scanner reader = new Scanner(System.in);
-            int r = reader.nextInt();
-            while (r > 83 - getGameCount() || r < 1) {
-                if (r > 83 - getGameCount() || r < 1) {
-                    int gamesLeft = 82 - getGameCount(); //could be broken during the playoffs but who cares
-                    System.out.println("Pick between 1-" + gamesLeft + " games left in the regular season:");
-                    r = reader.nextInt();
-                }
-            }
-            result = r;
-            //reader.close();
-        }
-        catch (InputMismatchException e) {
-            System.out.println("That wasn't an int. \n ");
-            League.homeView();
-        }
-        gamesToSim = result;
-    }
-
-    /**
-     * creates a new pop-up window
-     * right side is ranking of teams from best to worst
-     * left side is list of 15 games that were most recently played between 30 teams (15 pairings)
-     */
-    public static void viewSimGame() {
-        windowSimGame.clearTextAreaLeft();
-        windowSimGame.clearTextAreaRight();
-
-        int count = 1;
-        for (Team t: getRankings(teams)) {
-            windowSimGame.printLogLeft(count + ": " + t.printGameHeader());
-            count++;
-        }
-        windowSimGame.printLogRight(Season.printSimGameDayHeader());
-    }
+    }*/
 }

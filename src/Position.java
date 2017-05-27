@@ -4,7 +4,7 @@
  * essentially the same as an enum
  */
 public final class Position {
-
+    //instance fields
     public static final String PG = "PG";
     public static final String SG = "SG";
     public static final String SF = "SF";

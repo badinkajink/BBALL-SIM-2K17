@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
+/**
+ * creates window with two text areas
+ */
 public class MyGUI2 implements ActionListener {
     JFrame frame;
     MyDrawPanel drawPanel;
@@ -19,15 +22,27 @@ public class MyGUI2 implements ActionListener {
     PrintStream printStreamLeft, printStreamRight;
     PrintStream standardOut, standardErr;
 
+    /**
+     * prints to left text area
+     * @param strVal
+     */
     public void printLogLeft(String strVal) {
         //printStreamLeft.println(strVal + (new Date()));
         printStreamLeft.println(strVal);
     }
+
+    /**
+     * prints to right text area
+     * @param strVal
+     */
     public void printLogRight(String strVal) {
         //printStreamRight.println(strVal + (new Date()));
         printStreamRight.println(strVal);
     }
 
+    /**
+     * clears left text area
+     */
     public void clearTextAreaLeft() {
         try {
             textAreaLeft.getDocument().remove(0,textAreaLeft.getDocument().getLength());
@@ -36,6 +51,9 @@ public class MyGUI2 implements ActionListener {
             ex.printStackTrace();
         }
     }
+    /**
+     * clears right text area
+     */
     public void clearTextAreaRight() {
         try {
             textAreaRight.getDocument().remove(0,textAreaRight.getDocument().getLength());
@@ -45,6 +63,12 @@ public class MyGUI2 implements ActionListener {
         }
     }
 
+    /**
+     * creates two text panels with names and listeners
+     * creates room for logo
+     * @param labelStr1
+     * @param labelStr2
+     */
     public void create (String labelStr1, String labelStr2){
         frame = new JFrame();
         buttonLeft    = new JButton("Left");
@@ -119,6 +143,10 @@ public class MyGUI2 implements ActionListener {
         frame.setVisible(true);
     }
 
+    /**
+     * listener for clear left/right
+     * @param event
+     */
     public void actionPerformed (ActionEvent event) {
         if (event.getSource() == buttonClearLeft) {
             clearTextAreaLeft();

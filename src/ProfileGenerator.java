@@ -28,6 +28,9 @@ public final class ProfileGenerator {
     private static int[] newDraftPositions;
     private static int pick;
 
+    /**
+     * constructs new profile generator
+     */
     public ProfileGenerator(){
         setName();
         setDraftPosition();
@@ -36,6 +39,11 @@ public final class ProfileGenerator {
         setPosition();
     }
 
+    /**
+     * constructs new rookie profile generator
+     * @param exp
+     * @param a
+     */
     public ProfileGenerator(int exp, int a) {
         experience = exp;
         age = a;
@@ -44,6 +52,9 @@ public final class ProfileGenerator {
         setRookieDraftPosition();
     }
 
+    /**
+     * called when starting a new draft by league
+     */
     public static void rookieDraftReset(){
         newDraftPositions = new int[60];
         pick = 0;
@@ -54,6 +65,9 @@ public final class ProfileGenerator {
         }
     }
 
+    /**
+     * picks a rookie 1-60
+     */
     public void setRookieDraftPosition(){
         int dPick = pick;
         draftPosition = newDraftPositions[dPick];
@@ -61,6 +75,9 @@ public final class ProfileGenerator {
         pick++;
     }
 
+    /**
+     * was supposed to be random name generator, now just stephen+int + young+int
+     */
     public void setName()
     {
         Random nameNumber = new Random();
@@ -82,6 +99,9 @@ public final class ProfileGenerator {
         name = firstNames.get(0) + " " + lastNames.get(0);
     }
 
+    /**
+     * generates random position
+     */
     public void setPosition()
     {
         ArrayList<String> positionList = new ArrayList<String>();
@@ -99,6 +119,9 @@ public final class ProfileGenerator {
         position = positionList.get(positionPicker.nextInt(8));
     }
 
+    /**
+     * generates random draft position
+     */
     public void setDraftPosition()
     {
         draftPositions = new int[19][60];
@@ -128,37 +151,63 @@ public final class ProfileGenerator {
         draftPositions[dYear][dPick] = 0;
     }
 
+    /**
+     * sets age
+     */
     public void setAge()
     {
         age = 21 + draftAge;
     }
 
+    /**
+     * sets experience
+     */
     public void setExperience()
     {
         experience = draftAge;
     }
 
+    /**
+     * returns name
+     * @return name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     *
+     * @return playing position
+     */
     public String getPosition()
     {
         return position;
     }
 
+    /**
+     *
+     * @return draft position
+     */
     public int getDraftPosition()
     {
         return draftPosition;
     }
 
 
+    /**
+     *
+     * @return age
+     */
     public int getAge()
     {
         return age;
     }
 
+    /**
+     *
+     * @return experience
+     */
     public int getExperience()
     {
         return experience;

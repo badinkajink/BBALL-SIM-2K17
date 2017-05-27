@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Player {
 
     private PlayerProfile player;
-    private Contract contract;
+    //private Contract contract; //no longer using Contracts
     private String team;
 
     //contracts/money

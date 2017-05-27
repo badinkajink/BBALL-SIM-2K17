@@ -198,7 +198,11 @@ public class Team {
                 League.getPlayerPool().add(roster.remove(roster.indexOf(getWorst())));
             }
         }
+    }
 
+    public void cutOrSignPlayers() {
+        cutPlayers();
+        signPlayers();
     }
 
     public boolean getIsClient() {

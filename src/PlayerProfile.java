@@ -60,6 +60,9 @@ public class PlayerProfile {
     private double decrease;
     private int[] ratings;
 
+    /**
+     * creates player profile with randomized luck/age/experience/potential
+     */
     public PlayerProfile() {
         profile = new ProfileGenerator();
         Random rand = new Random();
@@ -123,7 +126,12 @@ public class PlayerProfile {
 
     }
 
-    //for rookies
+    /**
+     * creates rookie player
+     * documenting this now i realized i wrote this constructor incorrectly
+     * @param exp should be 0 anyway
+     * @param age should be 20 regardless
+     */
     public PlayerProfile(int exp, int age) {
         profile = new ProfileGenerator(0, 20);
         Random rand = new Random();
@@ -187,6 +195,10 @@ public class PlayerProfile {
                 passing, rebounding, steal, block, handling, basketballiq}; //13,14,15,16,17,18 indices for skills
     }
 
+    /**
+     * poor nomenclature returns 0-99 attributes of profile
+     * @return  0-99 attributes of profile
+     */
     public String getPlayer() {
         return ("Name: " + name + " Position: " + position + " Age: " + this.age + "\n" + "Experience: " + experience + " Draft Position: " + draftPos +
                 " Height: " + height / 12 + "'" + (height - (height / 12) * 12) + "\"" + " Weight: " + weight +
@@ -194,48 +206,94 @@ public class PlayerProfile {
     }
 
     //old getPlayer with alg, pot, luck printed, supposed to be kept secret from client
+
+    /**
+     * super secret getPlayer()
+     * @return secret!!
+     */
     public String getPlayerSecret() {
         return ("Name: " + name + " Position: " + position + " Age: " + this.age + "\n" + "Experience: " + experience + " Draft Position: " + draftPos +
                 " Height: " + height / 12 + "'" + (height - (height / 12) * 12) + "\"" + " Weight: " + weight +
                 "\n" + "Luck: " + luck + "\n" + "Potential: " + potential + "\n" + "PlayerValue: " + getPV() + "\n" + "Alg: " + pV.getAlg());
     }
 
+    /**
+     * player name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * playing positino
+     * @return position
+     */
     public String getPos() {
         return position;
     }
 
-    //only for rookies and establishing truePick, cosmetic thing as initial playerValue is unchangeable
+    /**
+     * poor nomenclature too
+     * only for rookies and establishing truePick, cosmetic thing as initial playerValue is unchangeable
+     * @param truePick
+     */
     public void changePos(int truePick) { draftPos = truePick;}
 
+    /**
+     * player age
+     * @return age
+     */
     public int getAge() {
         return this.age;
     }
 
+    /**
+     * player experience
+     * @return experience
+     */
     public int getExperience() {
         return experience;
     }
 
+    /**
+     * player draft position
+     * @return draft position
+     */
     public int getDraftPos() {
         return draftPos;
     }
 
+    //below two methods aren't used i'm pretty sure
+    /**
+     * player height
+     * @return height
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * player weight
+     * @return weight
+     */
     public int getWeight() {
         return weight;
     }
 
+    /**
+     * this is used a lot
+     * returns player value
+     * @return player value
+     */
     public int getPV() {
         return (int) pV.getPV();
     }
 
-
+    /**
+     * only called when year is incremented, thus experience is too
+     * updates all the ratings according to incremental improvement/
+     */
     public void updateProfile() {
         experience++;
         age++;
@@ -243,7 +301,12 @@ public class PlayerProfile {
         updateRatings();
     }
 
-
+    /**
+     * updates ratings dependent on age
+     * increment or decrement
+     * the many many assignments in each loop are just for consistency
+     * arraylist of ratings is update by instance fields aren't without calling all 18 assignments
+     */
     public void updateRatings() {
         for (int i = 0; i < getPlayerRatings().length; i++) {
             if (experience <= 5) {
@@ -286,6 +349,9 @@ public class PlayerProfile {
         checkRatings();
     }
 
+    /**
+     * makes sure ratings can't be less than 1 or greater than 99
+     */
     public void checkRatings() {
         for (int i = 0; i < ratings.length; i++) {
             if (ratings[i] > 99) ratings[i] = 99;
@@ -293,15 +359,27 @@ public class PlayerProfile {
         }
     }
 
+    /**
+     * tester method to print out history or player ratings
+     * @return players' PlayerValue history
+     */
     public ArrayList<Double> getPlayerValues() {
         return pV.getPlayerValues();
     }
 
+    /**
+     * i don't really know what this is for
+     * @return presumably player ratings
+     */
     public int[] getPlayerRatings() {
         return ratings;
     }
 
 
+    /**
+     * it says it's defunct so
+     * @return print out ratings
+     */
     public String printRatingsDefunct() {
         checkRatings();
         return ("Offense: " + ratings[0] + "\n" + "Defense: " + ratings[1] + "\n" + "Strength: " + ratings[2] + "\n" + "Speed: " + ratings[3]+ "\n"
@@ -311,6 +389,10 @@ public class PlayerProfile {
                 + "Handling: " + ratings[14] + "\n" + "Rebounding: " + ratings[15] + "\n" + "Steal: " + ratings[16] + "\n" + "Block: " + ratings[17] + "\n" + "BBIQ: " + ratings[18]);
     }
 
+    /**
+     * printed ratings but properly formatted
+     * @return player 0-99 ratings
+     */
     public String printRatings() {
         checkRatings();
         return ("Offense: " + ratings[0] + "   Defense: " + ratings[1] +
@@ -319,9 +401,9 @@ public class PlayerProfile {
                 + "\n" + "Passing: " + ratings[13] + "   Handle: " + ratings[14] + "  Rebounding: " + ratings[15] + "  Steal: " + ratings[16] + "      Block: " + ratings[17] + "    BBIQ: " + ratings[18]);
     }
 
-    //pretty sure i can delete all the fucking if loops in this because of the for loop in getPlayerRatings() goddamn
-    //instantiations here are temporary, in fact all these instance fields are never maintained
-    //ratings the array keeps track of fields as ints
+    /**
+     * assigns ratings for every player
+     */
     public void ratings() {
         int pV = getPV();
         int VARIANT = 30;

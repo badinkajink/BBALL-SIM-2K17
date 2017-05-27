@@ -5,9 +5,11 @@ import java.util.Scanner;
 /**
  * Created by WilliamUSER on 5/23/2017.
  * @author William
- * Client class allows for human player input
+ * Client class takes possession of a League-generated team and allows for human player input
  */
 public class Client {
+
+    //instance fields
     private static Team team;
     private static ArrayList<Player> roster;
 
@@ -16,12 +18,21 @@ public class Client {
         roster = team.getTeam();
     }*/
 
+    /**
+     * creates a team and tells the team object that it is now controlled by a client
+     * @param t client is created from League input (createClient())
+     */
     public Client(Team t) {
         team = t;
         roster = team.getTeam();
         team.setClient();
     }
 
+    /**
+     * called by Draft object, method nextPick()
+     * @param d nextPick() provides an arraylist of available players to pick
+     * @throws RuntimeException if someone enters a string for a player
+     */
     public static void draftPlayer(ArrayList<Player> d) throws RuntimeException {
         //System.out.println(Draft.printDraft());
         System.out.println("Pick a player number: ");
@@ -47,13 +58,27 @@ public class Client {
 
     }
 
+    /**
+     * calls native team method
+     * @return all the 0-99 player attributes for each team player
+     */
     public static String printTeam() {
         return team.printTeam();
     }
 
+    /**
+     * returns client team
+     * @return returns client team
+     */
     public static Team getTeam() {return team;}
     //completely copied over from team, needs heavy modifications
 
+    /**
+     * signs a player from the player pool with client input
+     * pops up window showing player pool and own team
+     * console outputs sign results
+     * @throws RuntimeException if client enters a string
+     */
     public static void signPlayers() throws RuntimeException {
         MyGUI2 windowTrade = new MyGUI2();
         windowTrade.create("PlayerPool", team.getName() + " (You):");
@@ -88,6 +113,12 @@ public class Client {
         League.homeView();
     }
 
+    /**
+     * cuts a player to the player pool with client input
+     * pops up window showing player pool and own team
+     * console outputs cut results
+     * @throws RuntimeException if client enters a string
+     */
     public static void cutPlayers() {
         team.retirePlayers();
         MyGUI2 windowTrade = new MyGUI2();
@@ -126,6 +157,13 @@ public class Client {
         League.homeView();
     }
 
+    /**
+     * propose a trade with client input
+     * between two teams with two sets of players
+     * pops up window showing teams trading with each other, players being traded
+     * outputs in console proposal/trade results
+     * @throws RuntimeException if client enters a string
+     */
     public static void proposeTrade() throws RuntimeException {
         MyGUI2 windowTrade = new MyGUI2();
         windowTrade.create("Propose Trade From:", "Propose Trade To:");

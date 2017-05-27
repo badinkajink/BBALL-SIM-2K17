@@ -7,6 +7,12 @@
 
 import java.util.Random;
 
+/**
+ * gamescore class allows for game simulation
+ * monstrosity of a class written entirely by eric xue
+ * could easily have been made thousands of lines shorter with for loops but no
+ * @author eric xue
+ */
 public class GameScore {
 
     //instance fields
@@ -73,7 +79,9 @@ public class GameScore {
     private int teamOnePoints;
     private int teamTwoPoints;
 
-    //simulates a game, determining the boxscore and how the game played out, assigning stats to players depending on their ratings
+    /**
+     *  simulates a game, determining the boxscore and how the game played out, assigning stats to players depending on their ratings
+     */
     public void simGame(Team team1, Team team2) {
         teamOnePoints = 0;
         teamTwoPoints = 0;
@@ -559,7 +567,10 @@ public class GameScore {
         int blockTotal2 = t2p1block + t2p12block + t2p3block + t2p4block + t2p5block + t2p6block + t2p7block + t2p8block + t2p9block + t2p10block + t2p11block + t2p12block;
         int bbiqTotal2 = t2p1bbiq + t2p12bbiq + t2p3bbiq + t2p4bbiq + t2p5bbiq + t2p6bbiq + t2p7bbiq + t2p8bbiq + t2p9bbiq + t2p10bbiq + t2p11bbiq + t2p12bbiq;
 
-        //determines if there is a field goal missed on team 1, and if so who gets the rebound on either team, with defensive rebound having a higher chance
+
+        /**
+         * determines if there is a field goal missed on team 1, and if so who gets the rebound on either team, with defensive rebound having a higher chance
+         */
         for(int n = 0; n < 50; n++)
         {
             int determinant = random.nextInt(99 * 12);
@@ -869,7 +880,9 @@ public class GameScore {
             }
         }
 
-        //determines assists for a player on team 1 randomly, because usage and player skill would assumedly even out
+        /**
+         * determines assists for a player on team 1 randomly, because usage and player skill would assumedly even out
+         */
         int determinant7 = (int)(30 * (0.01 * (passTotal1 / (12 * (pvTotal1/12)))));
         for(int x = 0; x < determinant7; x++)
         {
@@ -2488,7 +2501,10 @@ public class GameScore {
         }
     }
 
-    //returns points scored by team 1
+    /**
+     *     //returns points scored by team 1
+     * @return
+     */
     public int getTeamOnePoints()
     {
         return teamOnePoints;
@@ -2496,6 +2512,7 @@ public class GameScore {
 
     /**
      * returns points scored by team 2
+     * @return
      */
     public int getTeamTwoPoints()
     {

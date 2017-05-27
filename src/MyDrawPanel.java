@@ -5,6 +5,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * displays logo
+ */
 public class MyDrawPanel extends JPanel {
 
 /*    public void paintComponent (Graphics g) {
@@ -13,6 +16,10 @@ public class MyDrawPanel extends JPanel {
     }
 */
 
+    /**
+     * displays logo
+     * @param g
+     */
     public void paintComponent (Graphics g){
         Image image = new ImageIcon("logo.png").getImage();
         g.drawImage (image,3,4,this);

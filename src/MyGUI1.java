@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
+/**
+ * creates window with 1 text box
+ */
 public class MyGUI1 implements ActionListener {
     JFrame frame;
     MyDrawPanel drawPanel;
@@ -19,11 +22,18 @@ public class MyGUI1 implements ActionListener {
     PrintStream printStreamBB;
     PrintStream standardOut, standardErr;
 
+    /**
+     * prints to text box
+     * @param strVal
+     */
     public void printLog(String strVal) {
         //System.out.println("Time now is " + (new Date()));
         printStreamBB.println(strVal);
     }
 
+    /**
+     * clears text box
+     */
     public void clearTextArea() {
         try {
             textAreaBB.getDocument().remove(0,textAreaBB.getDocument().getLength());
@@ -33,6 +43,11 @@ public class MyGUI1 implements ActionListener {
         }
     }
 
+    /**
+     * creates buttons that aren't really used, just wanted to try it
+     * also creates panel for logo
+     * @param labelStr
+     */
     public void create (String labelStr){
         frame = new JFrame();
         buttonClear     = new JButton ("Clear");
@@ -86,6 +101,10 @@ public class MyGUI1 implements ActionListener {
         frame.setVisible(true);
     }
 
+    /**
+     * clears text area
+     * @param event
+     */
     public void actionPerformed (ActionEvent event) {
         if (event.getSource() == buttonClear) {
             clearTextArea();

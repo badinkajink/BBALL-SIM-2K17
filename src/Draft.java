@@ -8,11 +8,16 @@ import java.util.Scanner;
  */
 public class Draft {
     private static ArrayList<Player> rookies;
-    private static int truePick;
+    private static int truePick; //keeping track of index of pick
     private static int year;
     private static ArrayList<Team> draftOrder = League.getDraftOrder();
     private MyGUI2 windowDraft;
 
+    /**
+     * constructor creates draft of 60 new (20 yrs old, 0 yrs experience) players
+     * resets rookie player generators
+     * @param y year of draft
+     */
     public Draft(int y) {
         year = y;
         truePick = 1;
@@ -26,7 +31,13 @@ public class Draft {
         }
     }
 
-    public void start() {
+    /**
+     * when invoked creates a new draft
+     * opens window displaying draft players and team pick order
+     * console scans for user input on whether to begin draft/begin picking or not
+     * @throws InputMismatchException if client enters something besides "yes," i would really prefer it if you just entered "yes"
+     */
+    public void start() throws InputMismatchException {
         windowDraft = new MyGUI2();
         windowDraft.create("Draft", "Team Picks");
 
@@ -39,14 +50,14 @@ public class Draft {
         //windowDraft.clearTextAreaLeft();
         windowDraft.printLogRight(League.printDraftOrder());
         windowDraft.printLogLeft(printDraft());
-        System.out.println("\nBegin picking--Yes or No: ");
-        Scanner reader = new Scanner(System.in);
         try {
+            System.out.println("\nBegin picking--Yes or No: ");
+            Scanner reader = new Scanner(System.in);
             String input = reader.nextLine();
             input = input.toLowerCase();
             while (!(input.equals("yes") || input.equals("no"))) {
                 if (!(input.equals("yes") || input.equals("no"))) {
-                    System.out.println("Begin draft--Yes or No: ");
+                    System.out.println("Begin picking--Yes or No: ");
                     input = reader.nextLine();
                     input = input.toLowerCase();
                 }
@@ -58,20 +69,30 @@ public class Draft {
                 nextPick();
             }
             if (input.equals("no")) {
-                throw new InputMismatchException();
+                League.homeView();
             }
+
         }
         catch (InputMismatchException e) {
             System.out.println("You didn't say yes. \n ");
             League.homeView();
         }
+
     }
 
-    //probably won't need to use anymore
+
+    /**
+     * probably won't need to use anymore
+     * @return ArrayList<PlayeR></PlayeR> list of rookies, not needed
+     */
     public ArrayList<Player> getDraft() {
         return rookies;
     }
 
+    /**
+     * prints all players left in draft by mock rankings
+     * @return list of all draft players by mock draft rankings
+     */
     public static String printDraft() {
         String result = "";
         int count = 1;
@@ -82,6 +103,10 @@ public class Draft {
         return result;
     }
 
+    /**
+     * goes to next pick in draft
+     * calls next team in team draft order to make a pick
+     */
     public void nextPick() {
         while (truePick <=61) {
             //the next two if loops are for testing purposes and probably shouldnt stay
@@ -128,6 +153,10 @@ public class Draft {
 
     //JUST MAKE A DRAFTPICK CLASS
 
+    /**
+     * truepick allows teams to keep track of who is picking if going outside of mock rankings order
+     * @return true index of picking sequence
+     */
     public static int truePick() {
         return truePick;
     }
