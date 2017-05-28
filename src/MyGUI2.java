@@ -81,9 +81,9 @@ public class MyGUI2 implements ActionListener {
         buttonClearLeft.addActionListener(this);
         buttonClearRight.addActionListener(this);
 
-        textAreaLeft = new JTextArea(100,50);
+        textAreaLeft = new JTextArea(100,60);
         textAreaLeft.setLineWrap(true);
-        textAreaRight = new JTextArea(100,50);
+        textAreaRight = new JTextArea(100,60);
         textAreaRight.setLineWrap(true);
 
         labelLeft = new JLabel(labelStr1);
@@ -139,7 +139,7 @@ public class MyGUI2 implements ActionListener {
         frame.getContentPane().add(BorderLayout.EAST, panelRight);
 
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200,900);
+        frame.setSize(1400,825);
         frame.setVisible(true);
     }
 

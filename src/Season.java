@@ -57,6 +57,12 @@ public class Season {
         game = new GameScore();
         this.teams = teams;
         rankings = teams;
+        //only at the beginning of a new season are player totals reset
+        for (Team t: teams){
+            for (Player p: t.getTeam()) {
+                p.resetTotals();
+            }
+        }
     }
 
     public static void simGame(Team t1, Team t2) {
@@ -183,7 +189,7 @@ public class Season {
 
     public void simGames(int result) {
         for (int i = 0; i < result; i++){
-            League.cutOrSignPlayers();
+            League.cutOrSignPlayersLeague();
             //gameCount++;
             simOneGameDay();
             gameCount++;

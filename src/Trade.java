@@ -103,10 +103,10 @@ public final class Trade {
         } else if (difference >= TRADE_DIFF) {
             reason = "Team: " + team1.getName() + " (You) should reject the trade. You have from this trade a higher tradeValue of: " + difference;
         }
-        if (!team2.getIsClient() && difference <= -TRADE_DIFF){
+        if (!team2.getIsClient() && difference <= 0-TRADE_DIFF){
             result = false;
             reason = "Team: " + team2.getName() + " rejects the trade. It has from this trade a higher tradeValue of: " + Math.abs(difference);
-        } else if (difference <= -TRADE_DIFF) {
+        } else if (difference <= 0-TRADE_DIFF) {
             reason = "Team: " + team2.getName() + " (You) should reject the trade. You have from this trade a higher tradeValue of: " + Math.abs(difference);
         }
 
@@ -114,7 +114,7 @@ public final class Trade {
         {
             reason = "Trade works! Team: " + team1.getName() + " loses the trade. It has from this trade a higher tradeValue of: " + difference;
         }
-        else if (difference < 0 && difference >= TRADE_DIFF) {
+        if (difference < 0 && difference > 0-TRADE_DIFF) {
             reason = "Trade works! Team: " + team2.getName() + " loses the trade. It has from this trade a higher tradeValue of: " + absDifference;
         }
 
@@ -138,7 +138,7 @@ public final class Trade {
                 input = input.toLowerCase();
                 while (!(input.equals("yes") || input.equals("no"))) {
                     if (!(input.equals("yes") || input.equals("no"))) {
-                        System.out.println("Start season--Yes or No: ");
+                        System.out.println("Execute--Yes or No: ");
                         input = reader.nextLine();
                         input = input.toLowerCase();
                     }
@@ -172,6 +172,8 @@ public final class Trade {
             ArrayList<String> names2 = new ArrayList<>();
             ArrayList<Player> roster2 = team2.getTeam();
 
+            MyGUI2 windowTradeResult = new MyGUI2();
+            windowTradeResult.create("Trade Result: " + team1.getName(), "Trade Result: " + team2.getName());
             for (Player p : p1) {
                 names1.add(p.getName());
             }
@@ -194,22 +196,20 @@ public final class Trade {
                 p.changeTeam(team1.getName());
             }
 
-            System.out.println("\n \n \n TRADE RESULT ");
-            System.out.println(team1.printTeam());
-            System.out.println(team2.printTeam());
 
+        windowTradeResult.printLogLeft(team1.printTeam());
+        windowTradeResult.printLogRight(team2.printTeam());
+
+        System.out.println("\n \n \n TRADE RESULT ");
+            //System.out.println(team1.printTeam());
+            //System.out.println(team2.printTeam());
             for (Player p : p1) {
                 System.out.println("Player: " + p.getName() + " was traded from the: " + team1.getName() + " to the: " + team2.getName());
             }
             for (Player p : p2) {
                 System.out.println("Player: " + p.getName() + " was traded from the: " + team2.getName() + " to the: " + team1.getName());
             }
-        try {
             League.homeView();
-        }
-        catch (InputMismatchException ex){
-            League.homeView();
-        }
     }
 
     //UPDATE: NO TRADING DRAFT PICKS AND FUNCTIONALITY OF 3 TEAM TRADE CAN BE DONE WITH MULTIPLE 2 TEAM TRADES

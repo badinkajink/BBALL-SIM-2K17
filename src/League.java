@@ -142,6 +142,9 @@ public final class League {
         int count = 1;
         for (Team t: teams) {
             result += "\n" + count + ": " + t.getName();
+            if (t.getIsClient()) {
+                result += " (You)";
+            }
             count++;
         }
         return result;
@@ -224,7 +227,7 @@ public final class League {
             else { homeView(); }
         }
         catch (RuntimeException e) {
-            System.out.println("You entered a string. \n ");
+            System.out.println("You entered a string. Please enter a command, 0-9. \n ");
             homeView();
         }
     }
@@ -283,7 +286,7 @@ public final class League {
             windowLeague.printLog(Client.printTeam());
         }
         catch (InputMismatchException e) {
-            System.out.println("You entered a string. \n ");
+            System.out.println("You entered a string. Please pick a team number. \n ");
             createClient();
         }
     }
@@ -415,7 +418,14 @@ public final class League {
      */
     public static void start() {
         if (!activeSeason && !timeForDraft) {
-            updateLeague();
+            //updateLeague();
+            for (Team t: teams) {
+                t.seasonReset();
+            }
+            for (Team t: teams) {
+                t.cutPlayers();
+                t.signPlayers();
+            }
             startSeason();
         }
         else {
@@ -452,7 +462,7 @@ public final class League {
             }
         }
         catch (InputMismatchException e) {
-            System.out.println("You entered a string. \n ");
+            System.out.println("You entered an integer. \n ");
             homeView();
         }
         //UPDATE: all it does is cause a new error. reader.close(); //potentially gamebreaking
@@ -478,7 +488,7 @@ public final class League {
         activeSeason = false;
         activeTrade = true;
         timeForDraft = true;
-        League.updateTeams(); //increases age of everyone here
+        updateTeams(); //increases age of everyone here
         setDraftOrder();
         //should sort by ranking, w-l record
 
@@ -541,9 +551,9 @@ public final class League {
      */
     public static void updateLeague() {
         for (Team t: teams) {
-                t.seasonReset();
+            t.seasonReset();
+            t.cutOrSignPlayers();
         }
-        cutOrSignPlayers();
     }
 
     /**
@@ -559,11 +569,14 @@ public final class League {
      * no longer used
      * called by updateLeague() cuts or signs players based on need, every team must have exactly 12 players on roster
      */
-    public static void cutOrSignPlayers() {
-        for (Team t: teams) {
-            t.cutOrSignPlayers();
-        }
+
+    public static void cutOrSignPlayersLeague() {
+            for(Team t: teams){
+                t.cutOrSignPlayers();
+            }
+
     }
+
 
     /**
      * increments year

@@ -52,7 +52,7 @@ public class Client {
             roster.get(roster.size() - 1).getPlayer().changePos(Draft.truePick());
             roster.get(roster.size() - 1).changeTeam(team.getName());
         } catch (InputMismatchException e) {
-            System.out.println("You entered a string. \n ");
+            System.out.println("You entered a string. Please pick a number within the player index. \n ");
             draftPlayer(d);
         }
 
@@ -107,7 +107,7 @@ public class Client {
             windowTrade.printLogLeft(League.printPlayerPool());
             windowTrade.printLogRight(team.printTeam());
         } catch (InputMismatchException e) {
-            System.out.println("You entered a string. \n ");
+            System.out.println("You entered a string. Sign a player within your team's index. \n ");
             League.homeView();
         }
         League.homeView();
