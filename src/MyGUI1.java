@@ -54,7 +54,7 @@ public class MyGUI1 implements ActionListener {
 
         buttonClear.addActionListener(this);
 
-        textAreaBB = new JTextArea(100,40);
+        textAreaBB = new JTextArea(100,78);
         textAreaBB.setLineWrap(true);
 
         labelBB = new JLabel(labelStr);

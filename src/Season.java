@@ -18,6 +18,7 @@ public class Season {
     private static GameScore game;
     private static int gameCount;
     private static String simGameDayHeader;
+    private static String clientSimGameDayHeader;
     private static ArrayList<Team> rankings;
     private static int seed1wins;
     private static int seed2wins;
@@ -52,7 +53,7 @@ public class Season {
     public Season(ArrayList<Team> teams, int y) {
         year =y;
         windowSimGame = new MyGUI2();
-        windowSimGame.create( "" + year + "Rankings", "Game Scores");
+        windowSimGame.create( "" + year + "Rankings", "Game Scores", "(You) " + Client.getTeam().getName());
         gameCount = 0;
         game = new GameScore();
         this.teams = teams;
@@ -63,6 +64,9 @@ public class Season {
                 p.resetTotals();
             }
         }
+        windowSimGame.printLogBottom("Enter '2' to simulate a game. Then enter how many games you want to simulate." +
+                "\n1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                        "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)  0.Instructions  ");
     }
 
     public static void simGame(Team t1, Team t2) {
@@ -76,6 +80,14 @@ public class Season {
                             team2.printGameHeader() +
                             "\nGAME SCORE: "+
                             team1.getShortName() + ": " + game.getTeamOnePoints() + " " +team2.getShortName() + ": " + game.getTeamTwoPoints() + "\n";
+            if (t1 == Client.getTeam() || t2 == Client.getTeam()) {
+                clientSimGameDayHeader =
+                    "GAME: "+
+                            team1.printGameHeader() + " vs. " +
+                            team2.printGameHeader() +
+                            "\nGAME SCORE: "+
+                            team1.getShortName() + ": " + game.getTeamOnePoints() + " " +team2.getShortName() + ": " + game.getTeamTwoPoints();
+            }
         }
     }
 
@@ -195,13 +207,14 @@ public class Season {
             gameCount++;
             if (gameCount > 81) {
                 //simPlayoffs();
-                League.setDraft();
+                windowSimGame.printLogBottom("Begin " + year + " Draft--Yes or No:");
                 end();
             }
         }
         if (gameCount > 81) {
             //simPlayoffs();
             //League.setDraft();
+            windowSimGame.printLogBottom("Begin " + year + " draft--Yes or No:");
             end();
         }
 
@@ -226,6 +239,10 @@ public class Season {
         }
         catch (InputMismatchException e) {
             System.out.println("That wasn't an int. \n ");
+            windowSimGame.clearTextAreaBottom();
+            windowSimGame.printLogBottom("User Manual: Enter the corresponding number to call the action: \n" +
+                    "0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                    "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
             League.homeView();
         }
         //gamesToSim = result;
@@ -239,10 +256,17 @@ public class Season {
     public static void viewSimGame() {
         windowSimGame.clearTextAreaLeft();
         windowSimGame.clearTextAreaRight();
+        //windowSimGame.clearTextAreaBottom();
 
         int count = 1;
         for (Team t: getRankings(teams)) {
             windowSimGame.printLogLeft(count + ": " + t.printGameHeader());
+            if (t == Client.getTeam()) {
+                windowSimGame.printLogBottom("\n" + count + ": " + t.printGameHeader());
+                windowSimGame.printLogBottom(clientSimGameDayHeader +
+                        "\n0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                        "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
+            }
             count++;
         }
         windowSimGame.printLogRight(Season.printSimGameDayHeader());

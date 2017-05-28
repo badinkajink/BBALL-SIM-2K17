@@ -8,12 +8,17 @@ import java.util.Scanner;
  */
 public final class Trade {
 
-    private static final int TRADE_DIFF = 2000;
+    private static final int TRADE_DIFF = 1000;
     private static boolean validTrade = false;
-
+    private static String reason;
     //never used
     public Trade() {}
 
+    /**
+     *
+     * @return trade reason
+     */
+    public static String getReason() {return reason;}
     /**
      * //calculates overall tradeValue of a player in general
      * @param p player
@@ -82,9 +87,9 @@ public final class Trade {
      * @param team2
      * @return doesnt do anything w boolean but too afraid to change to void
      */
-    public static boolean proposeTrade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2) {
+    public static boolean proposeTrade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2, MyGUI2 windowTrade) {
         boolean result = true;
-        String reason = null;
+        reason = null;
         double p1sum = 0.0;
         double p2sum = 0.0;
         for (Player p: p1) {
@@ -118,20 +123,30 @@ public final class Trade {
             reason = "Trade works! Team: " + team2.getName() + " loses the trade. It has from this trade a higher tradeValue of: " + absDifference;
         }
 
+        String proposeResult = reason;
+
         System.out.println("\n" + reason);
 
-        System.out.println("Team 1: " + team1.getName() + "Total TradeValue: " + p1sum);
+        System.out.println("Team 1: " + team1.getName() + " Total TradeValue: " + p1sum);
+        proposeResult += "\n" + "Team 1: " + team1.getName() + " Total TradeValue: " + p1sum;
         for (Player p: p1) {
             System.out.println("Player: " + p.getName() + ": Trade Value: " + Player.round(tradeValue(p, team2),1));
+            proposeResult += "\nPlayer: " + p.getName() + ": Trade Value: " + Player.round(tradeValue(p, team2),1);
         }
 
-        System.out.println("Team 2: " + team2.getName() + "Total TradeValue: " + p2sum);
+        System.out.println("Team 2: " + team2.getName() + " Total TradeValue: " + p2sum);
+        proposeResult += "\nTeam 2: " + team2.getName() + " Total TradeValue: " + p2sum;
         for (Player p: p2) {
             System.out.println("Player: " + p.getName() + ": Trade Value: " + Player.round(tradeValue(p, team2),1));
+            proposeResult += "\nPlayer: " + p.getName() + ": Trade Value: " + Player.round(tradeValue(p, team2),1);
         }
+
+        windowTrade.clearTextAreaBottom();
+        windowTrade.printLogBottom(proposeResult);
 
         if (result) {
             System.out.println("\nExecute trade--Yes or No: ");
+            windowTrade.printLogBottom("\nExecute trade--Yes or No: ");
             Scanner reader = new Scanner(System.in);
             try {
                 String input = reader.nextLine();
@@ -144,6 +159,9 @@ public final class Trade {
                     }
                 }
                 if (input.equals("yes")) {
+                    windowTrade.printLogBottom(
+                            "\n0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                                    "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
                     Trade.trade(p1, team1, p2, team2);
                 }
                 if (input.equals("no")) {
@@ -173,7 +191,7 @@ public final class Trade {
             ArrayList<Player> roster2 = team2.getTeam();
 
             MyGUI2 windowTradeResult = new MyGUI2();
-            windowTradeResult.create("Trade Result: " + team1.getName(), "Trade Result: " + team2.getName());
+            windowTradeResult.create("Trade Result: " + team1.getName(), "Trade Result: " + team2.getName(), "Trade Result");
             for (Player p : p1) {
                 names1.add(p.getName());
             }
@@ -200,16 +218,21 @@ public final class Trade {
         windowTradeResult.printLogLeft(team1.printTeam());
         windowTradeResult.printLogRight(team2.printTeam());
 
+        String tradeResult = "\nTrade Result:";
+
         System.out.println("\n \n \n TRADE RESULT ");
             //System.out.println(team1.printTeam());
             //System.out.println(team2.printTeam());
             for (Player p : p1) {
+                tradeResult += ("\nPlayer: " + p.getName() + " was traded from the: " + team1.getName() + " to the: " + team2.getName());
                 System.out.println("Player: " + p.getName() + " was traded from the: " + team1.getName() + " to the: " + team2.getName());
             }
             for (Player p : p2) {
+                tradeResult += "\n \nPlayer: " + p.getName() + " was traded from the: " + team2.getName() + " to the: " + team1.getName();
                 System.out.println("Player: " + p.getName() + " was traded from the: " + team2.getName() + " to the: " + team1.getName());
             }
-            League.homeView();
+        windowTradeResult.printLogBottom("\nClose this window when done viewing." + tradeResult + "\nClose this window when done viewing.");
+        League.homeView();
     }
 
     //UPDATE: NO TRADING DRAFT PICKS AND FUNCTIONALITY OF 3 TEAM TRADE CAN BE DONE WITH MULTIPLE 2 TEAM TRADES

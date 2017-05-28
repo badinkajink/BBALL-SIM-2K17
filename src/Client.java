@@ -81,7 +81,7 @@ public class Client {
      */
     public static void signPlayers() throws RuntimeException {
         MyGUI2 windowTrade = new MyGUI2();
-        windowTrade.create("PlayerPool", team.getName() + " (You):");
+        windowTrade.create("PlayerPool", team.getName() + " (You):", "Console Output");
 
         try {
             int neededPlayers = 12 - roster.size();
@@ -100,6 +100,7 @@ public class Client {
                 }
             }
             Player p = League.getPlayerPool().get(pIndex);
+            windowTrade.printLogBottom("\n" + team.getName() + " (You) signed Player: " + p.getName() + "PlayerValue: " + p.getPlayer().getPV());
             p.changeTeam(team.getName());
             team.getTeam().add(League.getPlayerPool().remove(pIndex));
             windowTrade.clearTextAreaLeft();
@@ -122,7 +123,7 @@ public class Client {
     public static void cutPlayers() {
         team.retirePlayers();
         MyGUI2 windowTrade = new MyGUI2();
-        windowTrade.create("PlayerPool", team.getName() + " (You):");
+        windowTrade.create("PlayerPool", team.getName() + " (You):", "Console Output");
         try {
             int neededPlayers = roster.size() - 12;
             System.out.println("You currently have " + team.getTeam().size() + " players. You need to cut " + neededPlayers + " players to have 12 players on a roster");
@@ -144,6 +145,8 @@ public class Client {
             Player p = roster.get(pIndex);
             System.out.println("\n" + team.getName() + " (You) cut Player: " + p.getName() + "PlayerValue: " + p.getPlayer().getPV());
             System.out.println(p.getName() + " is now in the PlayerPool.\n");
+            windowTrade.printLogBottom("\n" + team.getName() + " (You) cut Player: " + p.getName() + "PlayerValue: " + p.getPlayer().getPV()+
+            "\n" + p.getName() + " is now in the PlayerPool.\n");
             p.changeTeam("PlayerPool");
             League.getPlayerPool().add(roster.remove(roster.indexOf(p)));
             windowTrade.clearTextAreaLeft();
@@ -166,7 +169,7 @@ public class Client {
      */
     public static void proposeTrade() throws RuntimeException {
         MyGUI2 windowTrade = new MyGUI2();
-        windowTrade.create("Propose Trade From:", "Propose Trade To:");
+        windowTrade.create("Propose Trade From:", "Propose Trade To:", "Console Output");
 
         Scanner reader = new Scanner(System.in);
         //these System.out.println statements will be broken up into console input and console outputs, i.e. two different console windows
@@ -180,6 +183,8 @@ public class Client {
             //proposing from t1
             windowTrade.printLogLeft(League.printTeamNames());
             System.out.println("Enter a string to restart the proposed trade. Which team do you want to propose from: ");
+            windowTrade.clearTextAreaBottom();
+            windowTrade.printLogBottom("Enter a string to restart the proposed trade. Which team do you want to propose from: ");
             int teamIndex1 = reader.nextInt() - 1;
 
             while (teamIndex1 > League.getTeams().size() || teamIndex1 < 0) {
@@ -195,6 +200,8 @@ public class Client {
             windowTrade.printLogLeft(t1.printTeam());
             //System.out.println(t1.printTeam());
             System.out.println("Enter a string to restart the trade. How many players do you want to trade: ");
+            windowTrade.clearTextAreaBottom();
+            windowTrade.printLogBottom("Enter a string to restart the proposed trade. How many players do you want to trade: ");
             int playerLength1 = reader.nextInt();
 
             while (playerLength1 > t1.getTeam().size() || playerLength1 < 0) {
@@ -207,6 +214,8 @@ public class Client {
             while (playerLength1 > 0) {
                 //System.out.println(t1.printTeam());
                 System.out.println("Pick the index of the player you want to trade: ");
+                windowTrade.clearTextAreaBottom();
+                windowTrade.printLogBottom(playerLength1 + " players left. Pick the index of the player you want to trade: ");
                 int pIndex = reader.nextInt() - 1;
                 while (pIndex > team.getTeam().size()) {
                     if (pIndex > team.getTeam().size()) {
@@ -230,6 +239,8 @@ public class Client {
 
             //Trading from t2
             windowTrade.printLogRight(League.printTeamNames());
+            windowTrade.clearTextAreaBottom();
+            windowTrade.printLogBottom("Which team do you want to propose a trade to: ");
             System.out.println("Which team do you want to trade to: ");
             int teamIndex2 = reader.nextInt() - 1;
 
@@ -246,6 +257,7 @@ public class Client {
             windowTrade.printLogRight(t2.printTeam());
             //System.out.println(t2.printTeam());
             System.out.println("How many players do you want to trade for: ");
+            windowTrade.printLogBottom("Enter a string to restart the proposed trade. How many players do you want to trade for: ");
             int playerLength2 = reader.nextInt();
 
             while (playerLength2 > t2.getTeam().size() || playerLength2 < 0) {
@@ -258,6 +270,8 @@ public class Client {
             while (playerLength2 > 0) {
                 //System.out.println(t2.printTeam());
                 System.out.println("Pick the index of the player you want to trade: ");
+                windowTrade.clearTextAreaBottom();
+                windowTrade.printLogBottom(playerLength2 + " players left. Pick the index of the player you want to trade: ");
                 int pIndex = reader.nextInt() - 1;
                 while (pIndex > team.getTeam().size()) {
                     if (pIndex > team.getTeam().size()) {
@@ -288,7 +302,7 @@ public class Client {
                 //System.out.println(p.printPlayer());
             }
 
-            Trade.proposeTrade(players1, t1, players2, t2);
+            Trade.proposeTrade(players1, t1, players2, t2, windowTrade);
         }
         catch (InputMismatchException e) {
             System.out.println("You entered a string. \n ");

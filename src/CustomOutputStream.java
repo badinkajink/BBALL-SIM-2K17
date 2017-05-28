@@ -8,6 +8,7 @@ import java.io.OutputStream;
 
 /**
  * This class extends from OutputStream to redirect output to a JTextArrea
+ * http://www.codejava.net/java-se/swing/redirect-standard-output-streams-to-jtextarea
  * GUI
  */
 public class CustomOutputStream extends OutputStream {

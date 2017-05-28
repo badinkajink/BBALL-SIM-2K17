@@ -12,11 +12,11 @@ public class Tester {
         //DRAFT DRAFT DRAFT TESTER DEFINITELY DOESNT WORK NOW
         League league = new League();
         System.out.println("\nWelcome to Basketball Simulator 2K17! " +
-                "\nBy: William Xie and Eric Xue " +
+                "\nBy: William Xie and Eric Xue (Logo by Vellia Zhou)" +
                 "\nFor: Mr. Young's AP Computer Science A Class" +
                 "\nGithub: https://github.com/badinkajink/APCS_FinalProject" +
-                "\nControl the team through console input. Delete the first two windows with just one text panel that pop up." +
-                "\nEnter '0' for more in-depth instructions. Afterwards, minimize the console to fit ~4-5 lines so that you can view pop-up windows and enter input on the same screen\n");
+                "\nControl the team through console input. You will have to delete a lot of windows." +
+                "\nPick a team to control, 1-30, and minimize the console to 4-5 rows.");
         league.homeView();
 /*        League.start();
 

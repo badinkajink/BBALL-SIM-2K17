@@ -21,53 +21,63 @@ public final class League {
     //private static MyGUI2 windowSimGame;
     private static int gamesToSim;
     private static boolean timeForDraft = false;
-    private static String instructions = "\nInstructions:" +
+    private static String instructions = "Instructions:" +
             "\nWelcome to Basketball Simulator 2K17! " +
-            "\nBy: William Xie and Eric Xue " +
+            "\nBy: William Xie and Eric Xue (Logo by Vellia Zhou)" +
             "\nFor: Mr. Young's AP Computer Science A Class" +
             "\nGithub: https://github.com/badinkajink/APCS_FinalProject" +
-            "\nControl the team through console input. Delete the first two windows with just one text panel that pop up." +
-            "\nEnter '0' for more in-depth instructions. Afterwards, minimize the console to fit ~4-5 lines so that you can view pop-up windows and enter input on the same screen" +
-            "\nEXCEPT WHILE DRAFTING PLAYERS, at any point in time, enter a string into the console to return to the User Manual." +
+            "\nControl the team through console input. You'll have to delete a lot of windows" +
+            "\nEnter '0' for more in-depth instructions. Minimize the console to fit ~4-5 lines." +
+            "\nExcepting all the other times, at any point in time, enter a string into the console to return to the User Manual." +
             "\nEntering actions via console will open up new windows on the GUI. You'll end up with a lot of windows open." +
-            "\nYou could choose to be cheeky and enter in Strings for ints or ints for Strings. Or you could choose not to. Only God can judge you.\n" +
+            "\nYou could be cheeky and enter in Strings for ints or ints for Strings. Or you could not.\n" +
 
+            "\nStart a season and simulate games:" +
             "\nThe whole point of the game is to build a team through trades and drafts that play games in order to win a championship." +
-            "\nUnfortunately we couldn't quite get the whole 'simulate playoffs and win championships' part, but you can play in games and seasons!" +
+            "\nWe couldn't quite get the whole 'simulate playoffs' part working, but you can play in games and seasons!" +
             "\nBefore you simulate any games(Enter '2'), you have to start a season (Enter '1'). " +
-            "\nThere are 82 games in a season. You can view the League rankings and Box Scores of the most recent 15 games in a window." +
-            "\nThere are some bugs regarding playing all 82 games and then initiating the next draft. If you can't finish a season, restart and sim games by 82\n" +
+            "\nThere are 82 games in a season. You can view the League rankings and Box Scores of the most recent 15 games." +
+            "\nThere are some bugs regarding playing all 82 games and then initiating the next draft. Oh well.\n" +
 
-            "\nUntil 60 games into the season and while the season is over, you may trade players (Enter '3')." +
+            "\nTrades: you can trade players between teams." +
+            "\nUntil 60 games into the season and while the season is over, you may trade players (Enter '3'). This is the trade deadline." +
             "\nTrades are proposed by you and can be between any two teams (not necessarily you and another team)." +
-            "\nPlayers have generated PlayerValues (and hidden, slightly modified TradeValues) that determine their 0-99 attributes, roster stats, and team trades." +
-            "\nA team will reject a trade if the sum of squares of the offered Players' TradeValues is 2000 less or 2000 more than the other team's sum." +
+            "\nPlayers have generated PlayerValues (and hidden, modified TradeValues)" +
+            "\nThese determine their 0-99 attributes, roster stats, and team trades." +
+            "\nTeams reject trades if the sum of squares of the offered Players' TradeValues is +-2000 than the other team's sum." +
             "\nAs a client, you will not be forced to reject, but will be encouraged not to accept if given a poor offer." +
             "\nIf a proposed trade is valid, you will have the chance to view the composite TradeValues and execute the trade or not.\n" +
 
-            "\nTo view the 0-99 player attributes and PlayerValues of each team (Enter '4' to see all teams), enter '1' through '30' to view an individual team." +
-            "\nTo view the roster stats of each team in a season (Enter '5' to see all teams), enter '1' through '30' to view an individual team." +
-            "\nTeam order will change frequently when selecting teams. Be very aware of this! This is due to static variables and bad game design." +
-            "\nPlayers gain PlayerValue rapidly from age 20-25. If lucky (you can't know this) they'll improve a little, a lot, or really a lot in year 6." +
-            "\nPlayerValues don't change from ages 27-32, and decrease by a consistently decremental amount until age 40, when they immediately retire.\n" +
+            "\nView Teams and Players:" +
+            "\nTo view the 0-99 attributes and PlayerValues of each team, Enter '4' to see teams, Enter '1'-'30' to view a team." +
+            "\nTo view the roster stats of each team in a season (Enter '5' to see all teams), enter '1' through '30' to view a team." +
+            "\nTeam order will changes frequently. Be very aware! This is due to static variables/bad program design." +
+            "\nPlayers gain PlayerValue years 0-5. If lucky (you can't know this) they'll improve a little, a lot, or really a lot in year 6." +
+            "\nPlayerValues don't change years 7-12, and decrease years 12-19. They immediately retire after year 19 (age 40).\n" +
 
-            "\nThe PlayerPool is a collection of free agent players. You will be forced to cut or sign players from the pool if you have less/more than 12 players." +
+            "\nPlayerPool: a collection of free agent players." +
+            "\nYou, the player, will be able to view PlayerPool and cut/sign players whenever you want."+
+            "\nYou will be forced to cut/sign players from the pool if you have less/more than 12 players." +
             "\nIf you want to remove a player on your team, enter '6'. If you want to sign a player from the pool, enter '7'." +
             "\nUnlike other actions, when forced to cut players, team actions will output information to console, not a window." +
-            "\nYou will still be able to view PlayerPool and perform cuts/signings whenever you choose to do so.\n"+
+            "\nFor some reason I can't figure out, you have to press 1 30 times to automate cutting for 30 teams.\n" +
 
-            "\nAfter a season ends, a draft of 60 new players occurs. Depending on how you performed in the season, you pick at two certain points." +
-            "\nAs will be told to you, mock draft rankings (done by PlayerValues) for those 60 players and the team pick order are outputted." +
-            "\nBut you don't need to pick in that order. AI teams will, however. Players are differentiated by generated PlayerValue, but may have different desirable 0-99 attributes" +
-            "\nPlayerValues also improve by a generated and hidden amount each year. You won't get to see it, but don't be immediately dissuaded by a low PlayerValue" +
-            "\nIf you exit a draft mid-pick or decline to immediately begin the draft, you should be able to enter '8' to resume the draft at where you were. High chance you'll crash.\n" +
+            "\nDraft: " +
+            "\nAfter a season ends, a draft of 60 new players occurs. Depending on league rankings, you pick at two certain points." +
+            "\nAs will be told to you, mock draft rankings (done by PlayerValues) for those 60 players and the team pick order are shown." +
+            "\nAI teams will pick in that order, you don't have to. Players are ranked by PlayerValue, but have different 0-99 stats." +
+            "\nPlayerValues improve by a hidden amount each year. Don't be immediately dissuaded by a low PlayerValue" +
+            "\nIf you exit a draft mid-pick or decline to immediately begin the draft, Enter '8' to resume the draft from where you were.\n" +
 
+            "\nExit: " +
             "\nEnter '9' to terminate the game. Your data won't be saved, but the dozens of windows cluttering your screen will close.\n" +
 
             "\nMiscellaneous facts and features that weren't implemented: "+
-            "\nWe implemented a merge search (aka Collections.sort()) to get rankings and draft orders. It works but it's the reason why the rankings are messed up." +
-            "\nSome things we meant to do that completely failed/needed more time: random name generation, live game viewing (i.e. game generation possession by possession), salary caps, trading DraftPicks" +
-            "\nThanks to Vellia Zhou for creating our awesome game logo!! Also thanks to Mr. Young for being the only reason I go to school.--William\n";
+            "\nWe implemented a merge search (aka Collections.sort()) to get rankings/draft orders." +
+            "\nIt works but it's why viewing teams is messed up." +
+            "\nSome things we meant to do that completely failed/needed more time: random name generation, live game viewing " +
+            "\n(i.e. game generation possession by possession), salary caps, trading DraftPicks, on-window user input" +
+            "\nThanks to Vellia Zhou for creating our awesome logo!! Also thanks to Mr. Young for being the only reason I go to school.\n";
 
     private static final String[] TEAM_NAMES = {"Boston Celtics", "Brooklyn Nets", "New York Knicks", "Philadelphia 76ers", "Toronto Raptors",
             "Chicago Bulls", "Cleveland Cavaliers", "Detroit Pistons", "Indiana Pacers", "Milwaukee Bucks",
@@ -81,6 +91,8 @@ public final class League {
     private static Season s;
 
     private static Draft newDraft;
+
+    private static MyGUI2 windowClient;
 
     /**
      * year = currentYear = 2017
@@ -163,8 +175,8 @@ public final class League {
         System.out.println("User Manual: Enter the corresponding number to call the action: \n" +
                 "0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
                 "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
+        Scanner reader = new Scanner(System.in);
         try {
-            Scanner reader = new Scanner(System.in);
             int r = reader.nextInt();
             while (r > 9 || r < 0) {
                 if (r > 9 || r < 0) {
@@ -175,6 +187,9 @@ public final class League {
             if (r == 0)
             {
                 System.out.println(instructions);
+                MyGUI1 windowInstructions = new MyGUI1();
+                windowInstructions.create("Instructions");
+                windowInstructions.printLog(instructions);
                 League.homeView();
             }
             else if (r == 1) {
@@ -225,6 +240,7 @@ public final class League {
                 System.exit(0);
             }
             else { homeView(); }
+            reader.close();
         }
         catch (RuntimeException e) {
             System.out.println("You entered a string. Please enter a command, 0-9. \n ");
@@ -258,20 +274,26 @@ public final class League {
      * @throws RuntimeException
      */
     public static void createClient() throws RuntimeException{
-        MyGUI1 windowClient = new MyGUI1();
-        windowClient.create("League");
+        windowClient = new MyGUI2();
+        windowClient.create("Instructions","Pick a team", "Console Output");
 
         try {
             int t = 0;
             Scanner team = new Scanner(System.in);
 
             //System.out.println("Pick a team number 1-30!");
-            windowClient.printLog("Pick a team number 1-30!");
-
+            windowClient.printLogRight("Pick a team number 1-30!");
+            windowClient.printLogLeft("Welcome to Basketball Simulator 2K17! " +
+                    "\nBy: William Xie and Eric Xue " +
+                    "\nFor: Mr. Young's AP Computer Science A Class" +
+                    "\nGithub: https://github.com/badinkajink/APCS_FinalProject" +
+                    "\nControl the team through console input. You will have to delete a lot of windows." +
+                    "\nPick a team to control, 1-30, and minimize the console to 4-5 rows.");
             for (int i = 1; i <= TEAM_NAMES.length; i++) {
-                windowClient.printLog("Team: " + i + " " + TEAM_NAMES[i - 1]);
+                windowClient.printLogRight("Team: " + i + " " + TEAM_NAMES[i - 1]);
                 //System.out.println("Team: " + i + " " + TEAM_NAMES[i - 1]);
             }
+
             System.out.println("Pick a team number 1-30: ");
             t = team.nextInt();
             while (t > 30 || t < 1) {
@@ -280,10 +302,18 @@ public final class League {
                     t = team.nextInt();
                 }
             }
+
             new Client(teams.get(t-1));
-            MyGUI1 windowLeague = new MyGUI1();
-            windowLeague.create("Client");
-            windowLeague.printLog(Client.printTeam());
+            //MyGUI1 windowLeague = new MyGUI1();
+            //windowLeague.create("Client");
+            windowClient.clearTextAreaLeft();
+            windowClient.clearTextAreaRight();
+            windowClient.printLogLeft(instructions);
+            windowClient.printLogRight(Client.printTeam());
+            windowClient.printLogBottom("You picked the: " + Client.getTeam().getName());
+            windowClient.printLogBottom("User Manual: Enter the corresponding number to call the action: \n" +
+                    "0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                    "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
         }
         catch (InputMismatchException e) {
             System.out.println("You entered a string. Please pick a team number. \n ");
@@ -298,15 +328,18 @@ public final class League {
      * @throws RuntimeException if a user inputs a string
      */
     public static void viewTeamStats() throws RuntimeException {
+        int teamLeagueIndex = League.getTeams().indexOf(Client.getTeam()) + 1;
         MyGUI2 windowOV = new MyGUI2();
         //League.printTeamNames(); //prints 1-30 list of teams
-        windowOV.create("League Overview", "Team");
+        windowOV.create("League Overview", "Team", "Console Output");
         windowOV.printLogLeft(League.printTeamNames());
+        windowOV.printLogBottom("Enter a string to return to the main menu: ");
+        windowOV.printLogBottom("Pick a team 1-30!" + "(You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
+        //System.out.println("Pick a team 1-30! Enter a string for the main menu: ");
         boolean flag = true;
         while (flag) {
-            int teamLeagueIndex = League.getTeams().indexOf(Client.getTeam()) + 1;
             Scanner reader = new Scanner(System.in);
-            System.out.println("Pick a team to view: (You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
+            System.out.println("Pick a team to view, 1-30: (You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
 
             try {
                 int teamIndex2 = reader.nextInt() - 1;
@@ -323,9 +356,17 @@ public final class League {
 
                 team = League.getTeams().get(teamIndex2);
                 windowOV.printLogRight(team.printTeamStats() + "\n");
+                windowOV.clearTextAreaBottom();
+                windowOV.printLogBottom("You picked: " + League.getTeams().get(teamIndex2).getName());
+                windowOV.printLogBottom("Enter a string to return to the main menu: ");
+                windowOV.printLogBottom("Pick a team 1-30!" + "(You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
 
             } catch (InputMismatchException e) {
                 System.out.println("You entered a string. \nTeam stat viewing is done.");
+                windowOV.clearTextAreaBottom();
+                windowOV.printLogBottom("User Manual: Enter the corresponding number to call the action: \n" +
+                        "0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                        "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
                 flag = false;
             }
         }
@@ -339,16 +380,17 @@ public final class League {
      * @throws RuntimeException if a user inputs a string
      */
     public static void viewTeams() throws RuntimeException{
+        int teamLeagueIndex = League.getTeams().indexOf(Client.getTeam()) + 1;
         MyGUI2 windowOV = new MyGUI2();
         //League.printTeamNames(); //prints 1-30 list of teams
-        windowOV.create("League Overview", "Team");
+        windowOV.create("League Overview", "Team", "Console Output");
         windowOV.printLogLeft(League.printTeamNames());
+        windowOV.printLogBottom("Enter a string to return to the main menu: ");
+        windowOV.printLogBottom("Pick a team 1-30!" + "(You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
         boolean flag = true;
         while (flag) {
-            int teamLeagueIndex = League.getTeams().indexOf(Client.getTeam()) + 1;
             Scanner reader = new Scanner(System.in);
             System.out.println("Pick a team to view: (You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
-
             try {
                 int teamIndex2 = reader.nextInt() - 1;
                 windowOV.clearTextAreaRight();
@@ -365,9 +407,18 @@ public final class League {
 
                 team = League.getTeams().get(teamIndex2);
                 windowOV.printLogRight(team.printTeam());
+                windowOV.clearTextAreaBottom();
+                windowOV.printLogBottom("You picked: " + League.getTeams().get(teamIndex2).getName());
+                windowOV.printLogBottom("Enter a string to return to the main menu: ");
+                windowOV.printLogBottom("Pick a team 1-30!" + "(You) " + teamLeagueIndex + ": " + Client.getTeam().getName() + ": ");
+
 
             } catch (InputMismatchException e) {
                 System.out.println("You entered a string. \nTeam viewing is done.");
+                windowOV.clearTextAreaBottom();
+                windowOV.printLogBottom("User Manual: Enter the corresponding number to call the action: \n" +
+                        "0.Instructions  1.Start Season  2.Sim Games  3.Trade  4.View Teams/Player Info  5.View Teams/Roster Stats  6.Cut Player  " +
+                        "7.Sign Player  8.Begin Draft  9.Exit Game (NO SAVES)");
                 flag = false;
             }
         }
@@ -440,6 +491,7 @@ public final class League {
      */
     public static void startSeason() {
         System.out.println("Start " +year+ " season--Yes or No: ");
+        windowClient.printLogBottom("Start " +year+ " season--Yes or No: ");
         Scanner reader = new Scanner(System.in);
         try {
             String input = reader.nextLine();
@@ -494,7 +546,7 @@ public final class League {
 
         newDraft = new Draft(year);
         int place = teams.indexOf(Client.getTeam())+1;
-        System.out.println("The " +year+ " regular and playoff (lol) games are over! (You) " + Client.getTeam().getName() + " were ranked " + place+ " out of 30! Congratulations");
+        System.out.println("The " +year+ " regular and playoff (lol) games are over! (You) " + Client.getTeam().getName() + " were ranked " + place+ " out of 30! Congratulations!");
         beginDraft();
         for (Player p: playerPool) {
             p.getPlayer().updateProfile();
@@ -529,13 +581,13 @@ public final class League {
                     newDraft.start();
                 }
                 if (input.equals("no")) {
-                    throw new InputMismatchException();
+                    homeView();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("You didn't say yes. \n ");
                 homeView();
             }
-            reader.close(); //potentially game breaking
+            //reader.close(); //potentially game breaking
         }
     }
 
@@ -657,12 +709,24 @@ public final class League {
      * @return string output of team draft order
      */
     public static String printDraftOrder() {
-        String result = year + " Draft Order: \n";
+        String result = year + " Draft Order: \n First Round: \n";
+        int count = 1;
         for (Team t: draftOrder) {
-            result += "\n" + t.printGameHeader();
+            result += "\n" + count + ": ";
+            if (t == Client.getTeam()) {
+                result += " (You)";
+            }
+            result +=  " " + t.printGameHeader();
+            count++;
         }
+        result += "\nSecond Round: \n";
         for (Team t: draftOrder) {
-            result += "\n" + t.printGameHeader();
+            result += "\n" + count + ": ";
+            if (t == Client.getTeam()) {
+                result += " (You)";
+            }
+            result +=  " " + t.printGameHeader();
+            count++;
         }
         return result;
     }

@@ -39,7 +39,7 @@ public class Draft {
      */
     public void start() throws InputMismatchException {
         windowDraft = new MyGUI2();
-        windowDraft.create("Draft", "Team Picks");
+        windowDraft.create("Draft", "Team Picks", "(You)" + Client.getTeam().printGameHeader());
 
         windowDraft.printLogLeft("\nWelcome to the " + year + " Basketball Simulator 2K17 Draft! \n");
         windowDraft.printLogLeft("These are Chad Ford's draft rankings. You don't need to follow his order, but AI teams will." +
@@ -51,6 +51,10 @@ public class Draft {
         windowDraft.printLogRight(League.printDraftOrder());
         windowDraft.printLogLeft(printDraft());
         try {
+            int clientOrder1st = League.getDraftOrder().indexOf(Client.getTeam()) + 1;
+            int clientOrder2nd = League.getDraftOrder().indexOf(Client.getTeam()) + 31;
+            windowDraft.printLogBottom("You are picking at: \n1st Round: " + clientOrder1st +
+                    "\n2nd Round: " + clientOrder2nd);
             System.out.println("\nBegin picking--Yes or No: ");
             Scanner reader = new Scanner(System.in);
             String input = reader.nextLine();
@@ -112,6 +116,14 @@ public class Draft {
             //the next two if loops are for testing purposes and probably shouldnt stay
             windowDraft.clearTextAreaLeft();
             windowDraft.printLogLeft(printDraft());
+            if ( truePick-31 == League.getDraftOrder().indexOf(Client.getTeam()))
+            {
+                windowDraft.printLogBottom(Client.getTeam().getDraftMessage());
+            }
+            if ( truePick == League.getDraftOrder().indexOf(Client.getTeam()) + 1)
+            {
+                windowDraft.printLogBottom(Client.getTeam().getDraftMessage());
+            }
             if (truePick == 31) {
                 windowDraft.printLogRight("\n Welcome to the second round! ");
                 windowDraft.printLogRight("The thirty-first pick of the draft: 31");
@@ -136,6 +148,11 @@ public class Draft {
                 if (truePick < 31)
                     //System.out.println("\nNext up is pick: " + truePick);
                     windowDraft.printLogRight("\nNext up is pick: " + truePick);
+                if ( truePick == League.getDraftOrder().indexOf(Client.getTeam())+1)
+                {
+                    windowDraft.printLogBottom("Pick: " + truePick + " You are picking: ");
+                    windowDraft.printLogBottom(Client.getTeam().getDraftMessage());
+                }
                 nextPick();
             }
             if (truePick > 30 && truePick <= 60) {
@@ -145,6 +162,11 @@ public class Draft {
                 if (truePick <61)
                     //System.out.println("\nNext up is pick: " + truePick);
                     windowDraft.printLogRight("\nNext up is pick: " + truePick);
+                if ( truePick-31 == League.getDraftOrder().indexOf(Client.getTeam()))
+                {
+                    windowDraft.printLogBottom("Pick: " + truePick + " You are picking: ");
+                    windowDraft.printLogBottom(Client.getTeam().getDraftMessage());
+                }
                 nextPick();
             }
             }

@@ -119,7 +119,7 @@ public class Team {
      * @return 0-99 attributes of each player on a team
      */
     public String printTeam() {
-        String result = "\n" + "\n" + getName() + " " + getName() + " " + getName() + "\n" + "\n";
+        String result = getName() + " " + getName() + " " + getName() + "\n";
         int count = 1;
         for (Player p: roster){
             result += "\nPlayer " + count + ": \n" + p.printPlayer() + "\n";
