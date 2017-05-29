@@ -25,7 +25,7 @@ public final class League {
             "\nWelcome to Basketball Simulator 2K17! " +
             "\nBy: William Xie and Eric Xue (Logo by Vellia Zhou)" +
             "\nFor: Mr. Young's AP Computer Science A Class" +
-            "\nGithub: https://github.com/badinkajink/APCS_FinalProject" +
+            "\nGithub: https://github.com/badinkajink/BBALL-SIM-2K17" +
             "\nControl the team through console input. You'll have to delete a lot of windows" +
             "\nEnter '0' for more in-depth instructions. Minimize the console to fit ~4-5 lines." +
             "\nExcepting all the other times, at any point in time, enter a string into the console to return to the User Manual." +

@@ -14,7 +14,7 @@ public class Tester {
         System.out.println("\nWelcome to Basketball Simulator 2K17! " +
                 "\nBy: William Xie and Eric Xue (Logo by Vellia Zhou)" +
                 "\nFor: Mr. Young's AP Computer Science A Class" +
-                "\nGithub: https://github.com/badinkajink/APCS_FinalProject" +
+                "\nGithub: https://github.com/badinkajink/BBALL-SIM-2K17" +
                 "\nControl the team through console input. You will have to delete a lot of windows." +
                 "\nPick a team to control, 1-30, and minimize the console to 4-5 rows.");
         league.homeView();
