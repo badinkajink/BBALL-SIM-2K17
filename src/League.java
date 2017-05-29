@@ -1,13 +1,11 @@
 /**
  * Created by WilliamUSER on 5/23/2017.
+ * @author william
  */
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-/*
-League class, only created once, all operations originate from League
- */
 public final class League {
 
     //most of these methods should be in the season class
@@ -271,7 +269,7 @@ public final class League {
     /**
      * creates a client with console output asking for input, based on 1-30 input assigns a team to client
      * the very first thing a player sees, before any instruction
-     * @throws RuntimeException
+     * @throws RuntimeException if use enters a string
      */
     public static void createClient() throws RuntimeException{
         windowClient = new MyGUI2();
@@ -521,7 +519,7 @@ public final class League {
     }
 
     /**
-     * if games played > 60, no more trades, meant to lock in playoffs but playoffs wasn't finished
+     * if games played is greater than 60, no more trades, meant to lock in playoffs but playoffs wasn't finished
      */
     public static void setTradeDeadline() {
         activeTrade = false;

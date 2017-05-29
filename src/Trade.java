@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * Created by William on 5/23/2017.
  * utility class that proposes and then either rejects, suggests, or executes trades
+ * @author william
  */
 public final class Trade {
 
@@ -22,7 +23,7 @@ public final class Trade {
     /**
      * //calculates overall tradeValue of a player in general
      * @param p player
-     * @return
+     * @return trade value without referring team
      */
     public static double tradeValue(Player p) {
         PlayerProfile player = p.getPlayer();
@@ -81,10 +82,11 @@ public final class Trade {
 
     /**
      * proposes and if valid executes trade
-     * @param p1
-     * @param team1
-     * @param p2
-     * @param team2
+     * @param p1 players from team1
+     * @param team1 team1 trading
+     * @param p2 players from team2
+     * @param team2 team2 trading
+     * @param windowTrade inherits MyGUI2 from client propose trade to output results of proposed trade
      * @return doesnt do anything w boolean but too afraid to change to void
      */
     public static boolean proposeTrade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2, MyGUI2 windowTrade) {
@@ -178,10 +180,10 @@ public final class Trade {
     /**
      * only takes from proposeTrade()
      * executes trade between teams
-     * @param p1
-     * @param team1
-     * @param p2
-     * @param team2
+     * @param p1 players traded from team1
+     * @param team1 team 1 trading
+     * @param p2 players traded from team2
+     * @param team2 team 2 trading
      */
     public static void trade(ArrayList<Player> p1, Team team1, ArrayList<Player> p2, Team team2) {
             ArrayList<Player> roster1 = team1.getTeam();

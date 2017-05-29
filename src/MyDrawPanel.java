@@ -1,5 +1,6 @@
 /**
  * Created by WilliamUSER on 5/24/2017.
+ * @author william
  */
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class MyDrawPanel extends JPanel {
 
     /**
      * displays logo
-     * @param g
+     * @param g logo
      */
     public void paintComponent (Graphics g){
         Image image = new ImageIcon("logo.png").getImage();

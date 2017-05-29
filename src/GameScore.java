@@ -79,8 +79,11 @@ public class GameScore {
     private int teamOnePoints;
     private int teamTwoPoints;
 
+
     /**
-     *  simulates a game, determining the boxscore and how the game played out, assigning stats to players depending on their ratings
+     * simulates a game, determining the boxscore and how the game played out, assigning stats to players depending on their ratings
+     * @param team1 first team
+     * @param team2 second team
      */
     public void simGame(Team team1, Team team2) {
         teamOnePoints = 0;
@@ -2503,7 +2506,7 @@ public class GameScore {
 
     /**
      *     //returns points scored by team 1
-     * @return
+     * @return team one points
      */
     public int getTeamOnePoints()
     {
@@ -2512,7 +2515,7 @@ public class GameScore {
 
     /**
      * returns points scored by team 2
-     * @return
+     * @return team two points
      */
     public int getTeamTwoPoints()
     {

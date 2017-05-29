@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * Created by William on 5/23/2017.
  * team class
+ * @author william
  */
 
 public class Team {
@@ -23,9 +24,10 @@ public class Team {
 
 
     /**
+     * not used anymore
      * constructs team with 12 players
-     * @param n
-     * @param index
+     * @param n name
+     * @param index index
      */
     //also a placeholder constructor until i can get random name generator
     public Team(String n, int index)
@@ -130,7 +132,7 @@ public class Team {
 
     /**
      * adds a player to the team
-     * @param p
+     * @param p player
      */
     public void add(Player p) {
         roster.add(p);
@@ -155,7 +157,7 @@ public class Team {
     /**
      *drafts first player available, highest playerValue, according to mysterious game engine and Chad Ford
      * if client, redirects to console input
-     * @param d
+     * @param d players left in draft
      */
     public void draftPlayer(ArrayList<Player> d) {
         if (isClient) {
@@ -178,7 +180,7 @@ public class Team {
 
     /**
      * not really sure why i need this
-     * @param d
+     * @param d draft message for team drafting, player drafted, and draft pick index
      */
     public void setDraftMessage(String d) { draftMessage = d;}
 
@@ -215,7 +217,7 @@ public class Team {
     }
 
     /**
-     * automates player signings if players < 12
+     * automates player signings if players is less than 12
      */
     public void signPlayers() {
         while (roster.size() < 12)
@@ -233,7 +235,7 @@ public class Team {
 
     /**
      * gets worst player in team by playervalue
-     * @return
+     * @return worst player on team by playervalue
      */
     public Player getWorst() {
         Player worst = null;
@@ -258,7 +260,7 @@ public class Team {
     }
 
     /**
-     * cuts worst player if > 12 players
+     * cuts worst player if roster has more than 12 players
      */
     public void cutPlayers() {
         while (roster.size() > 12)

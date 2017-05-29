@@ -1,5 +1,7 @@
 /**
  * Created by WilliamUSER on 5/24/2017.
+ * window with 2 text areas
+ * @author william
  */
 
 import javax.swing.*;
@@ -9,9 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
-/**
- * creates window with two text areas
- */
 public class MyGUI2 implements ActionListener {
     JFrame frame;
     MyDrawPanel drawPanel;
@@ -30,7 +29,7 @@ public class MyGUI2 implements ActionListener {
     ImageIcon logoicon;
     /**
      * prints to bottom text area
-     * @param strVal
+     * @param strVal string output
      */
     public void printLogBottom(String strVal) {
         printStreamBottom.println(strVal);
@@ -38,7 +37,7 @@ public class MyGUI2 implements ActionListener {
 
     /**
      * prints to left text area
-     * @param strVal
+     * @param strVal string output
      */
     public void printLogLeft(String strVal) {
         //printStreamLeft.println(strVal + (new Date()));
@@ -47,7 +46,7 @@ public class MyGUI2 implements ActionListener {
 
     /**
      * prints to right text area
-     * @param strVal
+     * @param strVal string output
      */
     public void printLogRight(String strVal) {
         //printStreamRight.println(strVal + (new Date()));
@@ -91,8 +90,8 @@ public class MyGUI2 implements ActionListener {
     /**
      * creates two text panels with names and listeners
      * creates room for logo
-     * @param labelStr1
-     * @param labelStr2
+     * @param labelStr1 text area label
+     * @param labelStr2 text area label
      */
     public void create (String labelStr1, String labelStr2){
         frame = new JFrame();
@@ -174,7 +173,7 @@ public class MyGUI2 implements ActionListener {
 
     /**
      * listener for clear left/right
-     * @param event
+     * @param event buttons for clearing, not used
      */
     public void actionPerformed (ActionEvent event) {
         if (event.getSource() == buttonClearLeft) {
@@ -196,9 +195,9 @@ public class MyGUI2 implements ActionListener {
 
     /**
      * was beginnings of text input within gui, never implemented
-     * @param labelStr1
-     * @param labelStr2
-     * @param labelStr3
+     * @param labelStr1 text area label
+     * @param labelStr2 text area label
+     * @param labelStr3 text area label
      */
     public void create (String labelStr1, String labelStr2, String labelStr3) {
         frame = new JFrame();

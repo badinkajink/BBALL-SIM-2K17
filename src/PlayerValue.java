@@ -1,6 +1,7 @@
 /**
  * Created by WilliamUSER on 5/20/2017.
  * done by eric, mostly determines player values to determine the player's actualy basketball ratings and skill
+ * @author eric xue
  */
 import java.util.ArrayList;
 import java.util.Random;

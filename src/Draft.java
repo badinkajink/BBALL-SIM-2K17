@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * Created by WilliamUSER on 5/23/2017.
  * simulates a basketball draft of 60 new players
+ * @author william
  */
 public class Draft {
     private static ArrayList<Player> rookies;
@@ -87,7 +88,7 @@ public class Draft {
 
     /**
      * probably won't need to use anymore
-     * @return ArrayList<PlayeR></PlayeR> list of rookies, not needed
+     * @return list of rookies, not needed
      */
     public ArrayList<Player> getDraft() {
         return rookies;

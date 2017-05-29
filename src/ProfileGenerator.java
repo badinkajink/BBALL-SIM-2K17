@@ -1,9 +1,7 @@
-/**
- * Created by WilliamUSER on 5/20/2017.
- */
 
 /**
  * Created by WilliamUSER on 5/20/2017.
+ * @author william and eric cowritten
  */
 
 import java.util.ArrayList;
@@ -41,8 +39,8 @@ public final class ProfileGenerator {
 
     /**
      * constructs new rookie profile generator
-     * @param exp
-     * @param a
+     * @param exp experience
+     * @param a age
      */
     public ProfileGenerator(int exp, int a) {
         experience = exp;

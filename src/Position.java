@@ -2,6 +2,7 @@
  * Created by WilliamUSER on 5/20/2017.
  * because enums are unnecessarily complicated
  * essentially the same as an enum
+ * @author eric xue
  */
 public final class Position {
     //instance fields

@@ -1,5 +1,6 @@
 /**
  * Created by WilliamUSER on 5/20/2017.
+ * @author william and eric cowritten
  */
 import java.util.ArrayList;
 import java.util.Random;
@@ -236,7 +237,7 @@ public class PlayerProfile {
     /**
      * poor nomenclature too
      * only for rookies and establishing truePick, cosmetic thing as initial playerValue is unchangeable
-     * @param truePick
+     * @param truePick draft picking index
      */
     public void changePos(int truePick) { draftPos = truePick;}
 

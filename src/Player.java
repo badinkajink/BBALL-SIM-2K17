@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * Created by William on 5/19/2017.
  * keeps track of contracts/teams throughout career, only keeps track of player stats per season
+ * @author william
  */
 
 public class Player {

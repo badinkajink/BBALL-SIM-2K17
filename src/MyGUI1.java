@@ -1,5 +1,8 @@
 /**
  * Created by WilliamUSER on 5/24/2017.
+ * @author william
+ * creates window with 1 text box
+ * not used anymore
  */
 
 import javax.swing.*;
@@ -9,9 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
-/**
- * creates window with 1 text box
- */
 public class MyGUI1 implements ActionListener {
     JFrame frame;
     MyDrawPanel drawPanel;
@@ -24,7 +24,7 @@ public class MyGUI1 implements ActionListener {
 
     /**
      * prints to text box
-     * @param strVal
+     * @param strVal output
      */
     public void printLog(String strVal) {
         //System.out.println("Time now is " + (new Date()));
@@ -46,7 +46,7 @@ public class MyGUI1 implements ActionListener {
     /**
      * creates buttons that aren't really used, just wanted to try it
      * also creates panel for logo
-     * @param labelStr
+     * @param labelStr text area label
      */
     public void create (String labelStr){
         frame = new JFrame();
@@ -103,7 +103,7 @@ public class MyGUI1 implements ActionListener {
 
     /**
      * clears text area
-     * @param event
+     * @param event button pressing to clear text area
      */
     public void actionPerformed (ActionEvent event) {
         if (event.getSource() == buttonClear) {
