@@ -1,5 +1,5 @@
 # APCS_FinalProject  <br />
-![alt text] https://imgur.com/a/tLsVv  <br />
+![alt text] (https://imgur.com/a/tLsVv)  <br />
 BASKETBALL SIMULATOR 2K17  <br />
 RUN TESTER TO PLAY GAME  <br />
 RUN TESTER TO PLAY GAME  <br />
